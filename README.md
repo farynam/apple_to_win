@@ -10,3 +10,4 @@ Use with qmk. Map apple USB keybaord A1242 to windows 10. It was tested for conv
 - CMD + z -> CTRL + z
 - CMD + LEFT -> HOME
 - CMD + END -> END
+- CMD + b -> CTRL + b

@@ -28,8 +28,9 @@ enum combo_events {
   CMD_QUIT,
   CMD_UNDO,
   CMD_HOME,
-  CMD_END //,
+  CMD_END,
   //CMD_SEL_LEFT
+  CMD_BOLD
 };
 
 const uint16_t PROGMEM copy_combo[] = {KC_LGUI, KC_C, COMBO_END};
@@ -43,6 +44,7 @@ const uint16_t PROGMEM quit_app_combo[] = {KC_LGUI, KC_Q, COMBO_END};
 const uint16_t PROGMEM undo_combo[] = {KC_LGUI, KC_Z, COMBO_END};
 const uint16_t PROGMEM home_combo[] = {KC_LGUI, KC_LEFT, COMBO_END};
 const uint16_t PROGMEM end_combo[] = {KC_LGUI, KC_RIGHT, COMBO_END};
+const uint16_t PROGMEM bold_combo[] = {KC_LGUI, KC_B, COMBO_END};
 //const uint16_t PROGMEM select_left_combo[] = {KC_LSFT, KC_LGUI, KC_LEFT, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
@@ -57,6 +59,7 @@ combo_t key_combos[COMBO_COUNT] = {
   [CMD_UNDO] = COMBO_ACTION(undo_combo),
   [CMD_HOME] = COMBO_ACTION(home_combo),
   [CMD_END] = COMBO_ACTION(end_combo),
+  [CMD_BOLD] = COMBO_ACTION(bold_combo)
   //[CMD_SEL_LEFT] = COMBO_ACTION(select_left_combo)
 };
 
@@ -119,6 +122,11 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
         tap_code16(KC_END);
       }
       break;
+    case CMD_BOLD:
+      if (pressed) {
+        tap_code16(LCTL(KC_B));
+      }
+      break;  
     /*  
     case CMD_SEL_LEFT:
       if (pressed) {
