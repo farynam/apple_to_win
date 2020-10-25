@@ -16,8 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
-#include "private.c"
-
+#include "private.h"
 
 enum combo_events {
   CMD_COPY,
@@ -32,6 +31,7 @@ enum combo_events {
   CMD_HOME,
   CMD_END,
   CMD_BOLD,
+  CMD_SAVE,
 
   PRIV_KEYS
 };
@@ -48,6 +48,8 @@ const uint16_t PROGMEM undo_combo[] = {KC_LGUI, KC_Z, COMBO_END};
 const uint16_t PROGMEM home_combo[] = {KC_LGUI, KC_LEFT, COMBO_END};
 const uint16_t PROGMEM end_combo[] = {KC_LGUI, KC_RIGHT, COMBO_END};
 const uint16_t PROGMEM bold_combo[] = {KC_LGUI, KC_B, COMBO_END};
+const uint16_t PROGMEM save_combo[] = {KC_LGUI, KC_S, COMBO_END};
+
 PRIV_COMBO
 
 combo_t key_combos[COMBO_COUNT] = {
@@ -63,6 +65,7 @@ combo_t key_combos[COMBO_COUNT] = {
   [CMD_HOME] = COMBO_ACTION(home_combo),
   [CMD_END] = COMBO_ACTION(end_combo),
   [CMD_BOLD] = COMBO_ACTION(bold_combo),
+  [CMD_SAVE] = COMBO_ACTION(save_combo),
 
   PRIV_KEY_COMBO_REL
 };
@@ -131,6 +134,12 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
         tap_code16(LCTL(KC_B));
       }
       break;
+    case CMD_SAVE:
+       if (pressed) {
+         tap_code16(LCTL(KC_S));
+       }
+       break;
+
 PRIV_CASE
   }
 }
