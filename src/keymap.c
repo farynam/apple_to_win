@@ -33,6 +33,9 @@ enum combo_events {
   CMD_BOLD,
   CMD_SAVE,
 
+  CMD_PREV,
+  CMD_NEXT,
+
   PRIV_KEYS
 };
 
@@ -50,6 +53,9 @@ const uint16_t PROGMEM end_combo[] = {KC_LGUI, KC_RIGHT, COMBO_END};
 const uint16_t PROGMEM bold_combo[] = {KC_LGUI, KC_B, COMBO_END};
 const uint16_t PROGMEM save_combo[] = {KC_LGUI, KC_S, COMBO_END};
 
+const uint16_t PROGMEM prev_combo[] = {KC_LGUI, KC_LBRC, COMBO_END};
+const uint16_t PROGMEM next_combo[] = {KC_LGUI, KC_RBRC, COMBO_END};
+
 PRIV_COMBO
 
 combo_t key_combos[COMBO_COUNT] = {
@@ -66,6 +72,8 @@ combo_t key_combos[COMBO_COUNT] = {
   [CMD_END] = COMBO_ACTION(end_combo),
   [CMD_BOLD] = COMBO_ACTION(bold_combo),
   [CMD_SAVE] = COMBO_ACTION(save_combo),
+  [CMD_PREV] = COMBO_ACTION(prev_combo),
+  [CMD_NEXT] = COMBO_ACTION(next_combo),
 
   PRIV_KEY_COMBO_REL
 };
@@ -139,7 +147,16 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
          tap_code16(LCTL(KC_S));
        }
        break;
-
+    case CMD_PREV:
+       if (pressed) {
+          tap_code16(LCTL(KC_LBRC));
+       }
+       break;
+    case CMD_NEXT:
+       if (pressed) {
+          tap_code16(LCTL(KC_RBRC));
+        }
+        break;
 PRIV_CASE
   }
 }
