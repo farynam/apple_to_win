@@ -16,6 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
+
 #include "private.h"
 
 enum combo_events {
@@ -38,8 +39,12 @@ enum combo_events {
 
   CMD_PREV,
   CMD_NEXT,
+
   //intellij idea
   CMD_SEARCH_CLASS,
+
+  CMD_SEARCH_IN_PATH,
+  CMD_REPLACE_IN_PATH,
 
   PRIV_KEYS
 };
@@ -65,6 +70,8 @@ const uint16_t PROGMEM prev_word_combo[] = {KC_LALT, KC_LEFT, COMBO_END};
 const uint16_t PROGMEM next_word_combo[] = {KC_LALT, KC_RIGHT, COMBO_END};
 const uint16_t PROGMEM search_class_combo[] = {KC_LGUI, KC_N, COMBO_END};
 
+const uint16_t PROGMEM find_in_path_combo[] = {KC_LGUI, KC_LSHIFT, KC_F, COMBO_END};
+const uint16_t PROGMEM replace_in_path_combo[] = {KC_LGUI, KC_LSHIFT, KC_R, COMBO_END};
 
 PRIV_COMBO
 
@@ -88,6 +95,9 @@ combo_t key_combos[COMBO_COUNT] = {
   [ALT_PREV_WORD] = COMBO_ACTION(prev_word_combo),
   [ALT_NEXT_WORD] = COMBO_ACTION(next_word_combo),
   [CMD_SEARCH_CLASS] = COMBO_ACTION(search_class_combo),
+
+  [CMD_SEARCH_IN_PATH] = COMBO_ACTION(find_in_path_combo),
+  [CMD_REPLACE_IN_PATH] = COMBO_ACTION(replace_in_path_combo),
 
   PRIV_KEY_COMBO_REL
 };
@@ -189,6 +199,17 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
     case CMD_SEARCH_CLASS:
        if (pressed) {
           tap_code16(LCTL(KC_N));
+        }
+        break;
+
+    case CMD_SEARCH_IN_PATH:
+       if (pressed) {
+          tap_code16(LCTL(LSFT(KC_F)));
+        }
+        break;
+    case CMD_REPLACE_IN_PATH:
+       if (pressed) {
+          tap_code16(LCTL(LSFT(KC_R)));
         }
         break;
 PRIV_CASE
