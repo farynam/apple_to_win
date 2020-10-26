@@ -2,7 +2,6 @@
 Use with qmk. Map apple USB keybaord A1242 to windows 10. It was tested for converter/usb_usb/hasu.
 
 ###usage:
-
 copy config.h
      keymap.c
 to your project in qmk     
@@ -17,6 +16,7 @@ dfu-programmer atmega32u4 reset
 
 
 ###Mappings:
+####General:
 - CMD + a -> CTRL + a
 - CMD + f -> CTRL + f
 - CMD + m -> CTRL + m (minimize current window
@@ -25,4 +25,13 @@ dfu-programmer atmega32u4 reset
 - CMD + z -> CTRL + z
 - CMD + LEFT -> HOME
 - CMD + END -> END
-- CMD + b -> CTRL + b
+- CMD + b -> CTRL + b (bold)
+- CMD + s -> CTRL + s
+- CMD + space -> CMD
+- ALT + left -> ctrl + left arrow
+- ALT + right -> ctrl + right arrow
+
+####for Intellij:
+- CMD + [ -> CTRL + [
+- CMD + ] -> CTRL + ]
+- CMD + n -> CTRL + n (search class)
