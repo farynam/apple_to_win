@@ -38,6 +38,8 @@ enum combo_events {
   CMD_SPTLGHT,
   CMD_PREV,
   CMD_NEXT,
+  CMD_PREV_TAB,
+  CMD_NEXT_TAB,
 
   //intellij idea
   CMD_SEARCH_CLASS,
@@ -69,6 +71,10 @@ const uint16_t PROGMEM save_combo[] = {KC_LGUI, KC_S, COMBO_END};
 
 const uint16_t PROGMEM prev_combo[] = {KC_LGUI, KC_LBRC, COMBO_END};
 const uint16_t PROGMEM next_combo[] = {KC_LGUI, KC_RBRC, COMBO_END};
+const uint16_t PROGMEM prev_tab_combo[] = {KC_LGUI, KC_LSHIFT, KC_LEFT, COMBO_END};
+const uint16_t PROGMEM next_tab_combo[] = {KC_LGUI, KC_LSHIFT, KC_RIGHT, COMBO_END};
+
+
 const uint16_t PROGMEM spotlight_combo[] = {KC_LGUI, KC_SPC, COMBO_END};
 const uint16_t PROGMEM prev_word_combo[] = {KC_LALT, KC_LEFT, COMBO_END};
 const uint16_t PROGMEM next_word_combo[] = {KC_LALT, KC_RIGHT, COMBO_END};
@@ -96,6 +102,9 @@ combo_t key_combos[COMBO_COUNT] = {
   [CMD_SAVE] = COMBO_ACTION(save_combo),
   [CMD_PREV] = COMBO_ACTION(prev_combo),
   [CMD_NEXT] = COMBO_ACTION(next_combo),
+  [CMD_NEXT_TAB] = COMBO_ACTION(next_tab_combo),
+  [CMD_PREV_TAB] = COMBO_ACTION(prev_tab_combo),
+
   [CMD_SPTLGHT] = COMBO_ACTION(spotlight_combo),
   [ALT_PREV_WORD] = COMBO_ACTION(prev_word_combo),
   [ALT_NEXT_WORD] = COMBO_ACTION(next_word_combo),
@@ -177,14 +186,24 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
        break;
     case CMD_PREV:
        if (pressed) {
-          tap_code16(LCTL(KC_LBRC));
+          tap_code16(LALT(KC_LEFT));
        }
        break;
     case CMD_NEXT:
        if (pressed) {
-          tap_code16(LCTL(KC_RBRC));
+          tap_code16(LALT(KC_RIGHT));
         }
         break;
+    case CMD_PREV_TAB:
+           if (pressed) {
+              tap_code16(LCTL(KC_PGUP));
+           }
+           break;
+    case CMD_NEXT_TAB:
+           if (pressed) {
+              tap_code16(LCTL(KC_PGDN));
+            }
+            break;
     case CMD_SPTLGHT:
        if (pressed) {
           tap_code16(KC_LGUI);
